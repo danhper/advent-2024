@@ -1,15 +1,9 @@
 (ns day1
-  (:require
-   [clojure.java.io :as io]
-   [clojure.string :as str]))
-
-(defn parse-line [line]
-  (mapv parse-long (str/split line #"\s+")))
+  (:require utils))
 
 (defn parse-file [filename]
-  (with-open [reader (io/reader filename)]
-    (apply mapv (comp sort vector)
-           (mapv parse-line (line-seq reader)))))
+  (apply mapv (comp sort vector)
+         (mapv utils/parse-ints (utils/get-lines filename))))
 
 (defn part1 [a b]
   (apply + (map (fn [x y] (abs (- x y))) a b)))

@@ -1,11 +1,8 @@
 (ns day2
-  (:require
-   [clojure.java.io :as io]
-   [clojure.string :as str]))
+  (:require utils))
 
 (defn parse-file [filename]
-  (with-open [reader (io/reader filename)]
-    (mapv (fn [v] (map parse-long (str/split v #"\s+"))) (line-seq reader))))
+  (map utils/parse-ints (utils/get-lines filename)))
 
 (defn safe? [v]
   (let [pairs (map vector v (drop 1 v))
